@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/SWKOM-Proejct.iml" filepath="$PROJECT_DIR$/.idea/SWKOM-Proejct.iml" />
+      <module fileurl="file://$PROJECT_DIR$/paperless-main/openapi-spring.iml" filepath="$PROJECT_DIR$/paperless-main/openapi-spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/paperless-main.iml" filepath="$PROJECT_DIR$/.idea/paperless-main.iml" />
     </modules>
   </component>
 </project>
