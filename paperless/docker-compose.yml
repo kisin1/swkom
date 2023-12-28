@@ -5,7 +5,7 @@ services:
     build:
       dockerfile: ui/Dockerfile
     ports:
-      - "8080:8084"
+      - "8080:80"
   backend:
     image: paperless:openjdk
     build:
