@@ -25,5 +25,30 @@ services:
     volumes:
       - paperless-data:/var/lib/postgresql/data
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_DEFAULT_USER: paperless
+      RABBITMQ_DEFAULT_PASS: paperless
+    ports:
+      - "5672:5672"  # RabbitMQ server
+      - "15672:15672"  # Management console
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+
+  minio:
+    image: minio/minio
+    volumes:
+      - minio-data:/data
+    environment:
+      MINIO_ROOT_USER: paperless
+      MINIO_ROOT_PASSWORD: paperless
+    ports:
+      - "9000:9000"  # MinIO server
+      - "9001:9001"  # MinIO Console
+    command: server /data --console-address ":9001"
+
 volumes:
   paperless-data:
+  rabbitmq-data:
+  minio-data:
