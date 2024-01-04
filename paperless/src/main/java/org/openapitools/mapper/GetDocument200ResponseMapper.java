@@ -1,14 +1,15 @@
 package org.openapitools.mapper;
 
+
 import org.mapstruct.*;
 import org.openapitools.model.GetDocument200Response;
+import org.openapitools.model.GetDocument200ResponsePermissions;
 import org.openapitools.model.GetDocuments200ResponseResultsInnerNotesInner;
 import org.openapitools.persistence.entities.*;
 import org.openapitools.persistence.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.security.Permissions;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.HashSet;
@@ -88,7 +89,7 @@ public abstract class GetDocument200ResponseMapper implements BaseMapper<Documen
     }
 
     @Named("permissionsEntity")
-    Permissions mapPermissions(AuthUser owner) {
+    GetDocument200ResponsePermissions mapPermissions(AuthUser owner) {
         if(owner == null) return null;
         return PermissionsMapper.entityToDto(owner);
     }
