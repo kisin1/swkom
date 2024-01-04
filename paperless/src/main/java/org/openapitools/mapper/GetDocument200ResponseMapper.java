@@ -6,6 +6,7 @@ import org.openapitools.model.GetDocuments200ResponseResultsInnerNotesInner;
 import org.openapitools.persistence.entities.*;
 import org.openapitools.persistence.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.security.Permissions;
 import java.time.OffsetDateTime;
@@ -14,6 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Component
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

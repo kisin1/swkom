@@ -5,9 +5,11 @@ import org.openapitools.model.GetDocument200ResponsePermissionsView;
 import org.openapitools.persistence.entities.AuthUser;
 import org.openapitools.persistence.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.security.Permissions;
 
+@Component
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
