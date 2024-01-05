@@ -19,7 +19,7 @@ import java.util.Set;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-public abstract class UpdateDocument200ResponseMapper implements BaseMapper<Document, UpdateDocument200Response> {
+public abstract class UpdateDocument200ResponseMapper implements BaseMapper<DocumentEntity, UpdateDocument200Response> {
     @Autowired
     private CorrespondentRepository correspondentRepository;
     @Autowired
@@ -43,7 +43,7 @@ public abstract class UpdateDocument200ResponseMapper implements BaseMapper<Docu
     @Mapping(target = "archiveSerialNumber", source = "archiveSerialNumber", qualifiedByName = "archiveSerialNumberDto")
     @Mapping(target = "owner", source = "owner", qualifiedByName = "ownerDto")
     @Mapping(target = "notes", source = "notes", qualifiedByName = "notesDto")
-    abstract public Document dtoToEntity(UpdateDocument200Response dto);
+    abstract public DocumentEntity dtoToEntity(UpdateDocument200Response dto);
 
     @Mapping(target = "correspondent", source = "correspondent", qualifiedByName = "correspondentEntity")
     @Mapping(target = "documentType", source = "documentType", qualifiedByName = "documentTypeEntity")
@@ -53,7 +53,7 @@ public abstract class UpdateDocument200ResponseMapper implements BaseMapper<Docu
     @Mapping(target = "owner", source = "owner", qualifiedByName = "ownerEntity")
     @Mapping(target = "userCanChange", source = "owner", qualifiedByName = "userCanChangeEntity")
     @Mapping(target = "notes", source = "notes", qualifiedByName = "notesEntity")
-    abstract public UpdateDocument200Response entityToDto(Document entity);
+    abstract public UpdateDocument200Response entityToDto(DocumentEntity entity);
 
     @Named("correspondentEntity")
     Integer map(Correspondent correspondent) {
@@ -137,27 +137,28 @@ public abstract class UpdateDocument200ResponseMapper implements BaseMapper<Docu
     }
 
     @Named("notesDto")
-    Set<DocumentsNote> mapNotesDto(List<GetDocuments200ResponseResultsInnerNotesInner> dtos) {
+    Set<DocumentsNote> mapNotesDto(List<Object> dtos) {
         if (dtos == null) return null;
         Set<DocumentsNote> notes = new HashSet<>();
-        for (GetDocuments200ResponseResultsInnerNotesInner dto : dtos) {
-            if (dto != null) {
-                notes.add(documentNotesMapper.dtoToEntity(dto));
+        for (Object dtoObject : dtos) {
+            if (dtoObject instanceof GetDocuments200ResponseResultsInnerNotesInner) {
+                GetDocuments200ResponseResultsInnerNotesInner dto = (GetDocuments200ResponseResultsInnerNotesInner) dtoObject;
+                DocumentsNote note = documentNotesMapper.dtoToEntity(dto);
+                notes.add(note);
             }
+            // Handle other possible types in the list, if any
         }
         return notes;
     }
 
     @Named("notesEntity")
-    List<GetDocuments200ResponseResultsInnerNotesInner> mapNotesEntity(Set<DocumentsNote> entities) {
+    List<Object> mapNotesEntity(Set<DocumentsNote> entities) {
         if (entities == null) return null;
-        List<GetDocuments200ResponseResultsInnerNotesInner> dtos = new ArrayList<>();
+        List<Object> dtos = new ArrayList<>();
         for (DocumentsNote entity : entities) {
-            if (entity != null) {
-                dtos.add(documentNotesMapper.entityToDto(entity));
-            }
+            GetDocuments200ResponseResultsInnerNotesInner dto = documentNotesMapper.entityToDto(entity);
+            dtos.add(dto);
         }
         return dtos;
     }
-
 }

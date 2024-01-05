@@ -12,7 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-public class Document {
+public class DocumentEntity {
 
     @Id
     @Column(nullable = false, updatable = false)

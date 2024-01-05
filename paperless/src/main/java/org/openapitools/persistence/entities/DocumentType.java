@@ -37,7 +37,7 @@ public class DocumentType {
     private AuthUser owner;
 
     @OneToMany(mappedBy = "documentType")
-    private Set<Document> documentTypeDocuments;
+    private Set<DocumentEntity> documentTypeDocuments;
 
     @OneToMany(mappedBy = "assignDocumentType")
     private Set<MailRule> assignDocumentTypeMailRules;
@@ -90,12 +90,12 @@ public class DocumentType {
         this.owner = owner;
     }
 
-    public Set<Document> getDocumentTypeDocumentsDocuments() {
+    public Set<DocumentEntity> getDocumentTypeDocumentsDocuments() {
         return documentTypeDocuments;
     }
 
     public void setDocumentTypeDocumentsDocuments(
-            final Set<Document> documentTypeDocuments) {
+            final Set<DocumentEntity> documentTypeDocuments) {
         this.documentTypeDocuments = documentTypeDocuments;
     }
 

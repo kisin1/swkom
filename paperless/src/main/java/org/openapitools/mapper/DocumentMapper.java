@@ -2,6 +2,7 @@ package org.openapitools.mapper;
 
 import org.mapstruct.*;
 import org.openapitools.jackson.nullable.JsonNullable;
+import org.openapitools.model.DocumentDto;
 import org.openapitools.persistence.entities.*;
 import org.openapitools.persistence.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.util.Set;
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 @Service
-public abstract class DocumentMapper implements BaseMapper<Document, org.openapitools.model.Document> {
+public abstract class DocumentMapper implements BaseMapper<DocumentEntity, DocumentDto> {
 
     @Autowired
     private CorrespondentRepository correspondentRepository;
@@ -35,14 +36,14 @@ public abstract class DocumentMapper implements BaseMapper<Document, org.openapi
     @Mapping(target = "storagePath", source = "storagePath", qualifiedByName = "storagePathDto")
     @Mapping(target = "tags", source = "tags", qualifiedByName = "tagsDto")
     @Mapping(target = "archiveSerialNumber", source = "archiveSerialNumber", qualifiedByName = "archiveSerialNumberDto")
-    abstract public Document dtoToEntity(org.openapitools.model.Document dto);
+    abstract public DocumentEntity dtoToEntity(DocumentDto dto);
 
     @Mapping(target = "correspondent", source = "correspondent", qualifiedByName = "correspondentEntity")
     @Mapping(target = "documentType", source = "documentType", qualifiedByName = "documentTypeEntity")
     @Mapping(target = "storagePath", source = "storagePath", qualifiedByName = "storagePathEntity")
     @Mapping(target = "tags", source = "tags", qualifiedByName = "tagsEntity")
     @Mapping(target = "createdDate", source = "created", qualifiedByName = "createdToCreatedDate")
-    abstract public org.openapitools.model.Document entityToDto(Document entity);
+    abstract public DocumentDto entityToDto(DocumentEntity entity);
 
     @Named("correspondentEntity")
     JsonNullable<Integer> map(Correspondent correspondent) {

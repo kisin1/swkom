@@ -37,7 +37,7 @@ public class Correspondent {
     private AuthUser owner;
 
     @OneToMany(mappedBy = "correspondent")
-    private Set<Document> correspondentDocuments;
+    private Set<DocumentEntity> correspondentDocuments;
 
     @OneToMany(mappedBy = "assignCorrespondent")
     private Set<MailRule> assignCorrespondentMailRules;
@@ -90,12 +90,12 @@ public class Correspondent {
         this.owner = owner;
     }
 
-    public Set<Document> getCorrespondentDocumentsDocuments() {
+    public Set<DocumentEntity> getCorrespondentDocumentsDocuments() {
         return correspondentDocuments;
     }
 
     public void setCorrespondentDocumentsDocuments(
-            final Set<Document> correspondentDocuments) {
+            final Set<DocumentEntity> correspondentDocuments) {
         this.correspondentDocuments = correspondentDocuments;
     }
 

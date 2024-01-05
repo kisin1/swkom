@@ -20,7 +20,7 @@ import java.util.Set;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-public abstract class GetDocument200ResponseMapper implements BaseMapper<Document, GetDocument200Response> {
+public abstract class GetDocument200ResponseMapper implements BaseMapper<DocumentEntity, GetDocument200Response> {
     @Autowired
     private CorrespondentRepository correspondentRepository;
     @Autowired
@@ -44,7 +44,7 @@ public abstract class GetDocument200ResponseMapper implements BaseMapper<Documen
     @Mapping(target = "archiveSerialNumber", source = "archiveSerialNumber", qualifiedByName = "archiveSerialNumberDto")
     @Mapping(target = "owner", source = "owner", qualifiedByName = "ownerDto")
     @Mapping(target = "notes", source = "notes", qualifiedByName = "notesDto")
-    abstract public Document dtoToEntity(GetDocument200Response dto);
+    abstract public DocumentEntity dtoToEntity(GetDocument200Response dto);
 
     @Mapping(target = "correspondent", source = "correspondent", qualifiedByName = "correspondentEntity")
     @Mapping(target = "documentType", source = "documentType", qualifiedByName = "documentTypeEntity")
@@ -54,7 +54,7 @@ public abstract class GetDocument200ResponseMapper implements BaseMapper<Documen
     @Mapping(target = "owner", source = "owner", qualifiedByName = "ownerEntity")
     @Mapping(target = "permissions", source = "owner", qualifiedByName = "permissionsEntity")
     @Mapping(target = "notes", source = "notes", qualifiedByName = "notesEntity")
-    abstract public GetDocument200Response entityToDto(Document entity);
+    abstract public GetDocument200Response entityToDto(DocumentEntity entity);
 
     @Named("correspondentEntity")
     Integer map(Correspondent correspondent) {

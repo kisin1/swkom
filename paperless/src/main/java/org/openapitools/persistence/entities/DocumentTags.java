@@ -21,7 +21,7 @@ public class DocumentTags {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "document_id", nullable = false)
-    private Document document;
+    private DocumentEntity document;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tag_id", nullable = false)
@@ -35,11 +35,11 @@ public class DocumentTags {
         this.id = id;
     }
 
-    public Document getDocument() {
+    public DocumentEntity getDocument() {
         return document;
     }
 
-    public void setDocument(final Document document) {
+    public void setDocument(final DocumentEntity document) {
         this.document = document;
     }
 

@@ -31,7 +31,7 @@ public class DocumentsNote {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "document_id")
-    private Document document;
+    private DocumentEntity document;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -49,7 +49,7 @@ public class DocumentsNote {
         this.created = created;
     }
 
-    public void setDocument(final Document document) {
+    public void setDocument(final DocumentEntity document) {
         this.document = document;
     }
 

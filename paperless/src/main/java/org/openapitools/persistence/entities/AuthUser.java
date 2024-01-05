@@ -98,7 +98,7 @@ public class AuthUser {
     private Set<MailAccount> mailAccounts;
 
     @OneToMany(mappedBy = "owner")
-    private Set<Document> documents;
+    private Set<DocumentEntity> documents;
 
     @OneToMany(mappedBy = "user")
     private Set<DocumentsNote> documentsNotes;

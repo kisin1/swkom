@@ -3,7 +3,7 @@ package org.openapitools.mapper;
 import org.mapstruct.*;
 import org.openapitools.model.GetDocuments200ResponseResultsInnerNotesInner;
 import org.openapitools.persistence.entities.AuthUser;
-import org.openapitools.persistence.entities.Document;
+import org.openapitools.persistence.entities.DocumentEntity;
 import org.openapitools.persistence.entities.DocumentsNote;
 import org.openapitools.persistence.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +44,7 @@ public abstract class DocumentNotesMapper implements BaseMapper<DocumentsNote, G
     }
 
     @Named("documentEntity")
-    Integer map(Document document) {
+    Integer map(DocumentEntity document) {
         return document.getId();
     }
 
@@ -59,7 +59,7 @@ public abstract class DocumentNotesMapper implements BaseMapper<DocumentsNote, G
     }
 
     @Named("documentDto")
-    Document mapDocument(Integer value) {
+    DocumentEntity mapDocument(Integer value) {
         return documentRepository.findById(value).orElse(null);
     }
 
