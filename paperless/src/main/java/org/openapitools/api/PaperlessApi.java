@@ -34,6 +34,8 @@ import org.openapitools.model.GetTasks200ResponseInner;
 import org.openapitools.model.GetUISettings200Response;
 import org.openapitools.model.GetUsers200Response;
 import org.openapitools.model.GetUsers200ResponseResultsInner;
+
+import java.io.IOException;
 import java.time.OffsetDateTime;
 import org.openapitools.model.SelectionData200Response;
 import org.openapitools.model.SelectionDataRequest;
@@ -52,15 +54,12 @@ import org.openapitools.model.UpdateTag200Response;
 import org.openapitools.model.UpdateTagRequest;
 import org.openapitools.model.UpdateUserRequest;
 import org.openapitools.model.UserInfo;
-import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import org.springframework.http.HttpStatus;
@@ -72,16 +71,14 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import javax.validation.constraints.*;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-10T06:36:40.060738Z[Etc/UTC]")
 @Validated
 @Tag(name = "Tasks", description = "the Tasks API")
-public interface ApiApi {
+public interface PaperlessApi {
 
     default Optional<NativeWebRequest> getRequest() {
         return Optional.empty();
@@ -989,7 +986,7 @@ public interface ApiApi {
         @Parameter(name = "storage_path__id__in", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "storage_path__id__in", required = false) Integer storagePathIdIn,
         @Parameter(name = "correspondent__id", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "correspondent__id", required = false) Integer correspondentId,
         @Parameter(name = "truncate_content", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "truncate_content", required = false) Boolean truncateContent
-    ) {
+    ) throws IOException {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
