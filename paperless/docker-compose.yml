@@ -18,12 +18,14 @@ services:
     image: postgres:latest
     environment:
       POSTGRES_USER: paperless
+      POSTGRES_PASSWORD: paperless
       POSTGRES_DB: paperless-swkom
       POSTGRES_HOST_AUTH_METHOD: trust
     ports:
       - "5432:5432"
     volumes:
       - paperless-data:/var/lib/postgresql/data
+
 
   rabbitmq:
     image: rabbitmq:3-management
