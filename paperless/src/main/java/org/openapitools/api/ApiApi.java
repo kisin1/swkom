@@ -78,7 +78,7 @@ import javax.annotation.Generated;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-10T06:36:40.060738Z[Etc/UTC]")
 @Validated
 @Tag(name = "Tasks", description = "the Tasks API")
-public interface PaperlessApi {
+public interface ApiApi {
 
     default Optional<NativeWebRequest> getRequest() {
         return Optional.empty();

@@ -21,13 +21,13 @@ import javax.annotation.Generated;
 @Generated(value = "com.paperless.codegen.languages.SpringCodegen", date = "2023-10-22T12:32:07.613318Z[Etc/UTC]")
 @Controller
 @RequestMapping("${openapi.paperlessRestServer.base-path:}")
-public class PaperlessApiController implements PaperlessApi {
+public class ApiController implements ApiApi {
     private final DocumentServiceImpl documentServiceImpl;
 
     private final NativeWebRequest request;
 
     @Autowired
-    public PaperlessApiController(NativeWebRequest request, DocumentServiceImpl documentServiceImpl) {
+    public ApiController(NativeWebRequest request, DocumentServiceImpl documentServiceImpl) {
         this.request = request;
         this.documentServiceImpl = documentServiceImpl;
     }

@@ -34,6 +34,7 @@ public class DocumentServiceImpl implements DocumentService {
     private final DocumentMapper documentMapper;
     private final GetDocument200ResponseMapper getDocument200ResponseMapper;
     private final UpdateDocument200ResponseMapper updateDocument200ResponseMapper;
+    private final ElasticSearchService elasticSearchService;
 
     private final MinioClient minioClient;
 
@@ -45,13 +46,14 @@ public class DocumentServiceImpl implements DocumentService {
 
 
     @Autowired
-    public DocumentServiceImpl(DocumentRepository documentRepository, DocumentMapper documentMapper, GetDocument200ResponseMapper getDocument200ResponseMapper, UpdateDocument200ResponseMapper updateDocument200ResponseMapper, MinioClient minioClient, RabbitMQSender rabbitMQSender) {
+    public DocumentServiceImpl(DocumentRepository documentRepository, DocumentMapper documentMapper, GetDocument200ResponseMapper getDocument200ResponseMapper, UpdateDocument200ResponseMapper updateDocument200ResponseMapper, MinioClient minioClient, RabbitMQSender rabbitMQSender,  ElasticSearchService elasticSearchService) {
         this.documentRepository = documentRepository;
         this.documentMapper = documentMapper;
         this.getDocument200ResponseMapper = getDocument200ResponseMapper;
         this.updateDocument200ResponseMapper = updateDocument200ResponseMapper;
         this.minioClient = minioClient;
         this.rabbitMQSender = rabbitMQSender;
+        this.elasticSearchService = elasticSearchService;
     }
 
     @Override
@@ -123,8 +125,9 @@ public class DocumentServiceImpl implements DocumentService {
                 documentDTOS.add(documentMapper.entityToDto(document));
             }
         } else {
-            //search with elasticsearch
-            log.info("Elastic search");
+            for (DocumentEntity document : elasticSearchService.searchDocument(query)) {
+                documentDTOS.add(documentMapper.entityToDto(document));
+            }
             }
 
 

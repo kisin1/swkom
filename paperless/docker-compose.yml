@@ -50,6 +50,35 @@ services:
       - "9001:9001"  # MinIO Console
     command: server /data --console-address ":9001"
 
+  elasticsearch:
+    image: elasticsearch:8.7.1
+    container_name: paperless-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "xpack.security.enabled=false"
+      - "xpack.security.enrollment.enabled=false"
+      - ELASTIC_PASSWORD=paperless
+    ports:
+      - 9200:9200
+      - 9300:9300
+
+  tesseract:
+    build:
+      context: ./tesseract
+      dockerfile: Dockerfile
+    container_name: paperless-tesseract
+    depends_on:
+      - minio
+      - rabbitmq
+    # additional configuration for tesseract (e.g., environment variables, volumes)
+    environment:
+      - OCR_TESSDATA=/usr/share/tesseract-ocr/4.00/tessdata
+    # other configurations like ports, volumes etc., depending on your application needs
+
+
 volumes:
   paperless-data:
   rabbitmq-data:
