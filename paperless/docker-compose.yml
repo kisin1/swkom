@@ -13,6 +13,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8088:8088"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - TESSERACT_DATAPATH=/usr/share/tesseract-ocr/4.00/tessdata # Adjust this path as needed
 
   database:
     image: postgres:latest
@@ -66,20 +69,13 @@ services:
       - 9300:9300
 
   tesseract:
-    build:
-      context: ./tesseract
-      dockerfile: Dockerfile
+    image: franky1/tesseract
     container_name: paperless-tesseract
-    depends_on:
-      - minio
-      - rabbitmq
-    # additional configuration for tesseract (e.g., environment variables, volumes)
-    environment:
-      - OCR_TESSDATA=/usr/share/tesseract-ocr/4.00/tessdata
-    # other configurations like ports, volumes etc., depending on your application needs
-
+    volumes:
+      - ocrdata:/ocrdata
 
 volumes:
   paperless-data:
   rabbitmq-data:
   minio-data:
+  ocrdata:
